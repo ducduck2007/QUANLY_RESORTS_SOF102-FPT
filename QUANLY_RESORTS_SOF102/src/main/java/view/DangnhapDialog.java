@@ -32,10 +32,10 @@ public class DangnhapDialog extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         txtPass = new javax.swing.JPasswordField();
         btnDangNhap = new javax.swing.JButton();
-        btnKetthuc = new javax.swing.JButton();
+        btnhuy = new javax.swing.JButton();
         lblImage = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        btnDangNhap1 = new javax.swing.JButton();
+        btnDoiMatKhau = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -57,17 +57,17 @@ public class DangnhapDialog extends javax.swing.JDialog {
 
         btnDangNhap.setText("Đăng nhập");
 
-        btnKetthuc.setText("Hủy");
-        btnKetthuc.addActionListener(new java.awt.event.ActionListener() {
+        btnhuy.setText("Hủy");
+        btnhuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKetthucActionPerformed(evt);
+                btnhuyActionPerformed(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel3.setText("Login Form");
 
-        btnDangNhap1.setText("Đổi mật khẩu");
+        btnDoiMatKhau.setText("Đổi mật khẩu");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,9 +84,9 @@ public class DangnhapDialog extends javax.swing.JDialog {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
                             .addContainerGap()
-                            .addComponent(btnDangNhap1)
+                            .addComponent(btnDoiMatKhau)
                             .addGap(18, 18, 18)
-                            .addComponent(btnKetthuc)
+                            .addComponent(btnhuy)
                             .addGap(18, 18, 18)
                             .addComponent(btnDangNhap))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -118,9 +118,9 @@ public class DangnhapDialog extends javax.swing.JDialog {
                     .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnKetthuc)
+                    .addComponent(btnhuy)
                     .addComponent(btnDangNhap)
-                    .addComponent(btnDangNhap1))
+                    .addComponent(btnDoiMatKhau))
                 .addContainerGap(90, Short.MAX_VALUE))
         );
 
@@ -135,9 +135,9 @@ public class DangnhapDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPassActionPerformed
 
-    private void btnKetthucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetthucActionPerformed
+    private void btnhuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhuyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnKetthucActionPerformed
+    }//GEN-LAST:event_btnhuyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,8 +183,8 @@ public class DangnhapDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDangNhap;
-    private javax.swing.JButton btnDangNhap1;
-    private javax.swing.JButton btnKetthuc;
+    private javax.swing.JButton btnDoiMatKhau;
+    private javax.swing.JButton btnhuy;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
