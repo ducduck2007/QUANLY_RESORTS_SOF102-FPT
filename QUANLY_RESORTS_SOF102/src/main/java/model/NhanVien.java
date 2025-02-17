@@ -9,16 +9,16 @@ package model;
  * @author Admin
  */
 public class NhanVien {
-    String maNV, tenNV, vaiTro, email;
+    String maNV, tenNV, gioiTinh, email;
     int lich;
 
     public NhanVien() {
     }
 
-    public NhanVien(String maNV, String tenNV, String vaiTro, String email, int lich) {
+    public NhanVien(String maNV, String tenNV, String gioiTinh, String email, int lich) {
         this.maNV = maNV;
         this.tenNV = tenNV;
-        this.vaiTro = vaiTro;
+        this.gioiTinh = gioiTinh;
         this.email = email;
         this.lich = lich;
     }
@@ -39,12 +39,12 @@ public class NhanVien {
         this.tenNV = tenNV;
     }
 
-    public String getVaiTro() {
-        return vaiTro;
+    public String getGioiTinh() {
+        return gioiTinh;
     }
 
-    public void setVaiTro(String vaiTro) {
-        this.vaiTro = vaiTro;
+    public void setGioiTinh(String gioiTinh) {
+        this.gioiTinh = gioiTinh;
     }
 
     public String getEmail() {
@@ -62,5 +62,7 @@ public class NhanVien {
     public void setLich(int lich) {
         this.lich = lich;
     }
+
+    
     
 }

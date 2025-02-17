@@ -12,13 +12,13 @@ import java.sql.DriverManager;
  * @author Admin
  */
 public class DataProvider {
-    public Connection dataConnection() throws Exception{
+    public static Connection dataConnection() throws Exception{
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         String url = "jdbc:sqlserver://localhost:1433;Database=SOF102";
-        String usernamer = "";
-        String password = "";
+        String username = "sa";
+        String password = "123456";
         
-        Connection con = DriverManager.getConnection(url, url, password);
+        Connection con = DriverManager.getConnection(url, username, password);
         return con;
     }
 }
