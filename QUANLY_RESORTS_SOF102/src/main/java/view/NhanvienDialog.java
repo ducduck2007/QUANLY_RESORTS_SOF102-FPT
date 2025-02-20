@@ -262,6 +262,27 @@ public class NhanvienDialog extends javax.swing.JDialog {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
+        StringBuilder sb = new StringBuilder();
+        if(txtMa.getText().equals("")){
+            sb.append("Xin nhập mã nhân viên\n");
+        }
+        if(txtTen.getText().equals("")){
+            sb.append("Xin nhập tên nhân viên\n");
+        }
+        if(!rdoNam.isSelected() && !rdoNu.isSelected()){
+            sb.append("Xin chọn giới tính\n");
+        }
+        if(txtEmail.getText().equals("")){
+            sb.append("Xin nhập email\n");
+        }
+        if(txtLich.getText().equals("")){
+            sb.append("Xin nhập lịch\n");
+        }
+        if(sb.length() > 0){
+            JOptionPane.showMessageDialog(this, sb.toString());
+            return;
+        }
+        
         NhanVien nv = new NhanVien();
         nv.setMaNV(txtMa.getText());
         nv.setTenNV(txtTen.getText());
@@ -288,6 +309,27 @@ public class NhanvienDialog extends javax.swing.JDialog {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
+        StringBuilder sb = new StringBuilder();
+        if(txtMa.getText().equals("")){
+            sb.append("Xin nhập mã nhân viên\n");
+        }
+        if(txtTen.getText().equals("")){
+            sb.append("Xin nhập tên nhân viên\n");
+        }
+        if(!rdoNam.isSelected() && !rdoNu.isSelected()){
+            sb.append("Xin chọn giới tính\n");
+        }
+        if(txtEmail.getText().equals("")){
+            sb.append("Xin nhập email\n");
+        }
+        if(txtLich.getText().equals("")){
+            sb.append("Xin nhập lịch\n");
+        }
+        if(sb.length() > 0){
+            JOptionPane.showMessageDialog(this, sb.toString());
+            return;
+        }
+        
         NhanVien nv = new NhanVien();
         nv.setMaNV(txtMa.getText());
         nv.setTenNV(txtTen.getText());
@@ -315,6 +357,15 @@ public class NhanvienDialog extends javax.swing.JDialog {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
+        StringBuilder sb = new StringBuilder();
+        if(txtMa.getText().equals("")){
+            sb.append("Xin nhập mã nhân viên\n");
+        }
+        if(sb.length() > 0){
+            JOptionPane.showMessageDialog(this, sb.toString());
+            return;
+        }
+        
         try {
             NhanVienDal nvDal = new NhanVienDal();
             if(nvDal.delete(txtMa.getText())){
@@ -339,6 +390,15 @@ public class NhanvienDialog extends javax.swing.JDialog {
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
         // TODO add your handling code here:
+        StringBuilder sb = new StringBuilder();
+        if(txtMa.getText().equals("")){
+            sb.append("Xin nhập mã nhân viên\n");
+        }
+        if(sb.length() > 0){
+            JOptionPane.showMessageDialog(this, sb.toString());
+            return;
+        }
+        
         try {
             NhanVienDal nvDal = new NhanVienDal();
             NhanVien nv = nvDal.findId(txtMa.getText());
