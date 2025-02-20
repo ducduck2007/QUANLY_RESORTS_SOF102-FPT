@@ -27,9 +27,9 @@ public class NhanvienDialog extends javax.swing.JDialog {
         initTable();
         fillTable();
     }
-    
-    public void initTable(){
-        String[] cols = new String[]{"Mã nhân viên","Tên nhân viên","Giới tính","Email"};
+
+    public void initTable() {
+        String[] cols = new String[]{"Mã nhân viên", "Tên nhân viên", "Giới tính", "Email"};
         tableModel.setColumnIdentifiers(cols);
         tblNhanvien.setModel(tableModel);
     }
@@ -263,46 +263,50 @@ public class NhanvienDialog extends javax.swing.JDialog {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
         StringBuilder sb = new StringBuilder();
-        if(txtMa.getText().equals("")){
+        if (txtMa.getText().equals("")) {
             sb.append("Xin nhập mã nhân viên\n");
         }
-        if(txtTen.getText().equals("")){
+        if (txtTen.getText().equals("")) {
             sb.append("Xin nhập tên nhân viên\n");
         }
-        if(!rdoNam.isSelected() && !rdoNu.isSelected()){
+        if (!rdoNam.isSelected() && !rdoNu.isSelected()) {
             sb.append("Xin chọn giới tính\n");
         }
-        if(txtEmail.getText().equals("")){
+        if (txtEmail.getText().equals("")) {
             sb.append("Xin nhập email\n");
         }
-        if(txtLich.getText().equals("")){
+        if (txtLich.getText().equals("")) {
             sb.append("Xin nhập lịch\n");
         }
-        if(sb.length() > 0){
+        if (sb.length() > 0) {
             JOptionPane.showMessageDialog(this, sb.toString());
             return;
         }
-        
+
         NhanVien nv = new NhanVien();
         nv.setMaNV(txtMa.getText());
         nv.setTenNV(txtTen.getText());
-        if(rdoNam.isSelected()){
+        if (rdoNam.isSelected()) {
             nv.setGioiTinh("Nam");
-        }else {
+        } else {
             nv.setGioiTinh("Nữ");
         }
         nv.setEmail(txtEmail.getText());
         int lich = Integer.parseInt(txtLich.getText());
         nv.setLich(lich);
-        try {
-            NhanVienDal nvDal = new NhanVienDal();
-            if(nvDal.insert(nv)){
-                JOptionPane.showMessageDialog(this, "Thêm thành công");
-            }else {
-                JOptionPane.showMessageDialog(this, "Thêm nhân viên thất bại");
+
+        int choice = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không ?");
+        if (choice == JOptionPane.YES_OPTION) {
+            try {
+                NhanVienDal nvDal = new NhanVienDal();
+                if (nvDal.insert(nv)) {
+                    JOptionPane.showMessageDialog(this, "Thêm thành công");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Thêm nhân viên thất bại");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         fillTable();
     }//GEN-LAST:event_btnThemActionPerformed
@@ -310,47 +314,50 @@ public class NhanvienDialog extends javax.swing.JDialog {
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
         StringBuilder sb = new StringBuilder();
-        if(txtMa.getText().equals("")){
+        if (txtMa.getText().equals("")) {
             sb.append("Xin nhập mã nhân viên\n");
         }
-        if(txtTen.getText().equals("")){
+        if (txtTen.getText().equals("")) {
             sb.append("Xin nhập tên nhân viên\n");
         }
-        if(!rdoNam.isSelected() && !rdoNu.isSelected()){
+        if (!rdoNam.isSelected() && !rdoNu.isSelected()) {
             sb.append("Xin chọn giới tính\n");
         }
-        if(txtEmail.getText().equals("")){
+        if (txtEmail.getText().equals("")) {
             sb.append("Xin nhập email\n");
         }
-        if(txtLich.getText().equals("")){
+        if (txtLich.getText().equals("")) {
             sb.append("Xin nhập lịch\n");
         }
-        if(sb.length() > 0){
+        if (sb.length() > 0) {
             JOptionPane.showMessageDialog(this, sb.toString());
             return;
         }
-        
+
         NhanVien nv = new NhanVien();
         nv.setMaNV(txtMa.getText());
         nv.setTenNV(txtTen.getText());
-        if(rdoNam.isSelected()){
+        if (rdoNam.isSelected()) {
             nv.setGioiTinh("Nam");
-        }else {
+        } else {
             nv.setGioiTinh("Nữ");
         }
         nv.setEmail(txtEmail.getText());
         int lich = Integer.parseInt(txtLich.getText());
         nv.setLich(lich);
-        
-        try {
-            NhanVienDal nvDal = new NhanVienDal();
-            if(nvDal.update(nv)){
-                JOptionPane.showMessageDialog(this, "Sửa nhân viên thành công");
-            }else {
-                JOptionPane.showMessageDialog(this, "Sửa nhân viên thất bại");
+
+        int choice = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không ?");
+        if (choice == JOptionPane.YES_OPTION) {
+            try {
+                NhanVienDal nvDal = new NhanVienDal();
+                if (nvDal.update(nv)) {
+                    JOptionPane.showMessageDialog(this, "Sửa nhân viên thành công");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Sửa nhân viên thất bại");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         fillTable();
     }//GEN-LAST:event_btnSuaActionPerformed
@@ -358,23 +365,26 @@ public class NhanvienDialog extends javax.swing.JDialog {
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
         StringBuilder sb = new StringBuilder();
-        if(txtMa.getText().equals("")){
+        if (txtMa.getText().equals("")) {
             sb.append("Xin nhập mã nhân viên\n");
         }
-        if(sb.length() > 0){
+        if (sb.length() > 0) {
             JOptionPane.showMessageDialog(this, sb.toString());
             return;
         }
-        
-        try {
-            NhanVienDal nvDal = new NhanVienDal();
-            if(nvDal.delete(txtMa.getText())){
-                JOptionPane.showMessageDialog(this, "Xóa nhân viên thành công");
-            }else {
-                JOptionPane.showMessageDialog(this, "Xóa nhân viên thất bại");
+
+        int choice = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không ?");
+        if (choice == JOptionPane.YES_OPTION) {
+            try {
+                NhanVienDal nvDal = new NhanVienDal();
+                if (nvDal.delete(txtMa.getText())) {
+                    JOptionPane.showMessageDialog(this, "Xóa nhân viên thành công");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xóa nhân viên thất bại");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         fillTable();
     }//GEN-LAST:event_btnXoaActionPerformed
@@ -391,22 +401,22 @@ public class NhanvienDialog extends javax.swing.JDialog {
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
         // TODO add your handling code here:
         StringBuilder sb = new StringBuilder();
-        if(txtMa.getText().equals("")){
+        if (txtMa.getText().equals("")) {
             sb.append("Xin nhập mã nhân viên\n");
         }
-        if(sb.length() > 0){
+        if (sb.length() > 0) {
             JOptionPane.showMessageDialog(this, sb.toString());
             return;
         }
-        
+
         try {
             NhanVienDal nvDal = new NhanVienDal();
             NhanVien nv = nvDal.findId(txtMa.getText());
             txtMa.setText(nv.getMaNV());
             txtTen.setText(nv.getTenNV());
-            if(nv.getGioiTinh().equals("Nam")){
+            if (nv.getGioiTinh().equals("Nam")) {
                 rdoNam.setSelected(true);
-            }else {
+            } else {
                 rdoNu.setSelected(true);
             }
             txtEmail.setText(nv.getEmail());
@@ -419,15 +429,15 @@ public class NhanvienDialog extends javax.swing.JDialog {
     private void tblNhanvienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanvienMouseClicked
         // TODO add your handling code here:
         int row = tblNhanvien.getSelectedRow();
-        if(row >= 0){
+        if (row >= 0) {
             String maNV = (String) tblNhanvien.getValueAt(row, 0);
             NhanVienDal nvDal = new NhanVienDal();
             NhanVien nv = nvDal.findId(maNV);
             txtMa.setText(nv.getMaNV());
             txtTen.setText(nv.getTenNV());
-            if(nv.getGioiTinh().equals("Nam")){
+            if (nv.getGioiTinh().equals("Nam")) {
                 rdoNam.setSelected(true);
-            }else {
+            } else {
                 rdoNu.setSelected(true);
             }
             txtEmail.setText(nv.getEmail());

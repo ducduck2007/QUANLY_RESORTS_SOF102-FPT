@@ -4,11 +4,19 @@
  */
 package view;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Phong;
+import services.PhongDal;
+
 /**
  *
  * @author Admin
  */
 public class DatPhongDialog extends javax.swing.JDialog {
+
+    DefaultTableModel tableModel = new DefaultTableModel();
 
     /**
      * Creates new form DatPhongDialog
@@ -16,6 +24,23 @@ public class DatPhongDialog extends javax.swing.JDialog {
     public DatPhongDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        initTable();
+        fill();
+    }
+
+    public void initTable() {
+        String[] cols = new String[]{"Mã phòng", "Số phòng", "Loại phòng", "Giá phòng"};
+        tableModel.setColumnIdentifiers(cols);
+        tblDatphong.setModel(tableModel);
+    }
+
+    public void fill() {
+        tableModel.setRowCount(0);
+        PhongDal pDal = new PhongDal();
+        List<Phong> list = pDal.findAll();
+        for (Phong phong : list) {
+            tableModel.addRow(new Object[]{phong.getMaP(), phong.getSoP(), phong.getLoaiP(), phong.getGiaP()});
+        }
     }
 
     /**
@@ -55,6 +80,11 @@ public class DatPhongDialog extends javax.swing.JDialog {
         jLabel2.setText("Tìm kiếm");
 
         btnTimkiem.setText("Tìm kiếm");
+        btnTimkiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimkiemActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Mã phòng");
 
@@ -67,12 +97,32 @@ public class DatPhongDialog extends javax.swing.JDialog {
         jLabel6.setText("Giá phòng");
 
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         btnCapthat.setText("Cập nhật trạng thái");
+        btnCapthat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapthatActionPerformed(evt);
+            }
+        });
 
         btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         btnLammoi.setText("Làm mới");
+        btnLammoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLammoiActionPerformed(evt);
+            }
+        });
 
         tblDatphong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -85,6 +135,11 @@ public class DatPhongDialog extends javax.swing.JDialog {
                 "Mã phòng", "Số phòng", "Loại phòng", "Giá Phòng"
             }
         ));
+        tblDatphong.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDatphongMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblDatphong);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -169,6 +224,187 @@ public class DatPhongDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+        StringBuilder sb = new StringBuilder();
+        if (txtMa.getText().equals("")) {
+            sb.append("Xin nhập mã phòng\n");
+        }
+        if (txtSophong.getText().equals("")) {
+            sb.append("Xin nhập số phòng\n");
+        } else {
+            try {
+                int soP = Integer.parseInt(txtSophong.getText());
+            } catch (Exception e) {
+                sb.append("Số phòng không được nhập chữ\n");
+            }
+        }
+        if (txtGia.getText().equals("")) {
+            sb.append("Xin nhập giá\n");
+        } else {
+            try {
+                float giaP = Float.parseFloat(txtGia.getText());
+            } catch (Exception e) {
+                sb.append("Giá không được nhập chữ\n");
+            }
+        }
+        if (sb.length() > 0) {
+            JOptionPane.showMessageDialog(this, sb.toString());
+            return;
+        }
+
+        Phong p = new Phong();
+        p.setMaP(txtMa.getText());
+        int soP = Integer.parseInt(txtSophong.getText());
+        p.setSoP(soP);
+        p.setLoaiP(String.valueOf(cboLoai.getSelectedItem()));
+        float giaP = Float.parseFloat(txtGia.getText());
+        p.setGiaP(giaP);
+
+        int choice = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không ?");
+        if (choice == JOptionPane.YES_OPTION) {
+            try {
+                PhongDal pDal = new PhongDal();
+                if (pDal.insert(p)) {
+                    JOptionPane.showMessageDialog(this, "Thêm thành công");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Thêm thất bại");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        fill();
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnCapthatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapthatActionPerformed
+        // TODO add your handling code here:
+        StringBuilder sb = new StringBuilder();
+        if (txtMa.getText().equals("")) {
+            sb.append("Xin nhập mã phòng\n");
+        }
+        if (txtSophong.getText().equals("")) {
+            sb.append("Xin nhập số phòng\n");
+        } else {
+            try {
+                int soP = Integer.parseInt(txtSophong.getText());
+            } catch (Exception e) {
+                sb.append("Số phòng không được nhập chữ\n");
+            }
+        }
+        if (txtGia.getText().equals("")) {
+            sb.append("Xin nhập giá\n");
+        } else {
+            try {
+                float giaP = Float.parseFloat(txtGia.getText());
+            } catch (Exception e) {
+                sb.append("Giá không được nhập chữ\n");
+            }
+        }
+        if (sb.length() > 0) {
+            JOptionPane.showMessageDialog(this, sb.toString());
+            return;
+        }
+
+        Phong p = new Phong();
+        p.setMaP(txtMa.getText());
+        int soP = Integer.parseInt(txtSophong.getText());
+        p.setSoP(soP);
+        p.setLoaiP(String.valueOf(cboLoai.getSelectedItem()));
+        float giaP = Float.parseFloat(txtGia.getText());
+        p.setGiaP(giaP);
+
+        int choice = JOptionPane.showConfirmDialog(this, "Bạn có muốn cập nhập không ?");
+        if (choice == JOptionPane.YES_OPTION) {
+            try {
+                PhongDal pDal = new PhongDal();
+                if (pDal.update(p)) {
+                    JOptionPane.showMessageDialog(this, "Cập nhập thành công");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Cập nhập thất bại");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        fill();
+    }//GEN-LAST:event_btnCapthatActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+        StringBuilder sb = new StringBuilder();
+        if (txtMa.getText().equals("")) {
+            sb.append("Xin nhập mã phòng\n");
+        }
+        if (sb.length() > 0) {
+            JOptionPane.showMessageDialog(this, sb.toString());
+            return;
+        }
+
+        try {
+            PhongDal pDal = new PhongDal();
+            if (pDal.delete(txtMa.getText())) {
+                JOptionPane.showMessageDialog(this, "Xóa thành công");
+            } else {
+                JOptionPane.showMessageDialog(this, "Xóa thất bại");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        fill();
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnTimkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimkiemActionPerformed
+        // TODO add your handling code here:
+        StringBuilder sb = new StringBuilder();
+        if (txtSearch.getText().equals("")) {
+            sb.append("Xin nhập mã phòng vào textbox tìm kiếm\n");
+        }
+        if (sb.length() > 0) {
+            JOptionPane.showMessageDialog(this, sb.toString());
+            return;
+        }
+        try {
+            PhongDal pDal = new PhongDal();
+            Phong p = pDal.findId(txtSearch.getText());
+
+            txtMa.setText(p.getMaP());
+            txtSophong.setText(String.valueOf(p.getSoP()));
+            cboLoai.setSelectedItem(p.getLoaiP());
+            txtGia.setText(String.valueOf(p.getGiaP()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnTimkiemActionPerformed
+
+    private void btnLammoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLammoiActionPerformed
+        // TODO add your handling code here:
+        txtMa.setText("");
+        txtSophong.setText("");
+        cboLoai.setSelectedIndex(0);
+        txtGia.setText("");
+        txtSearch.setText("");
+    }//GEN-LAST:event_btnLammoiActionPerformed
+
+    private void tblDatphongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatphongMouseClicked
+        // TODO add your handling code here:
+        int row = tblDatphong.getSelectedRow();
+        if (row >= 0) {
+            String maP = (String) tblDatphong.getValueAt(row, 0);
+            try {
+                PhongDal pDal = new PhongDal();
+                Phong p = pDal.findId(maP);
+
+                txtMa.setText(p.getMaP());
+                txtSophong.setText(String.valueOf(p.getSoP()));
+                cboLoai.setSelectedItem(p.getLoaiP());
+                txtGia.setText(String.valueOf(p.getGiaP()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_tblDatphongMouseClicked
 
     /**
      * @param args the command line arguments
